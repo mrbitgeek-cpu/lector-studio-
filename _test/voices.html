@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Voces</title></head>
+<body><pre id="out">cargando</pre>
+<script>
+function dump() {
+  const list = (window.speechSynthesis ? speechSynthesis.getVoices() : []).map(v => ({
+    name: v.name, lang: v.lang, local: v.localService, uri: v.voiceURI
+  }));
+  window.__voices = { count: list.length, list };
+  document.getElementById('out').textContent = JSON.stringify(window.__voices, null, 2);
+}
+if (window.speechSynthesis) {
+  speechSynthesis.onvoiceschanged = dump;
+  dump();
+  setTimeout(dump, 1500);
+  setTimeout(dump, 4000);
+} else {
+  document.getElementById('out').textContent = 'sin speechSynthesis';
+}
+</script>
+</body></html>
+

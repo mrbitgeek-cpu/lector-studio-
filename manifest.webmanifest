@@ -1,0 +1,28 @@
+{
+  "name": "LectorStudio · biblioteca en voz alta",
+  "short_name": "LectorStudio",
+  "description": "Sube EPUB y PDF, reconoce fotocopias con OCR y escucha tus libros con las voces del dispositivo. Tu biblioteca y tu marcador se guardan en local.",
+  "lang": "es-MX",
+  "dir": "ltr",
+  "start_url": "./#/",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#12100c",
+  "theme_color": "#12100c",
+  "categories": ["books", "education", "productivity"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Mi biblioteca",
+      "short_name": "Biblioteca",
+      "url": "./#/",
+      "description": "Abrir la estantería"
+    }
+  ]
+}

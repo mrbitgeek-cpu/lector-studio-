@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>OCR test</title></head>
+<body>
+<pre id="out">iniciando…</pre>
+<script src="/vendor/tesseract/tesseract.min.js"></script>
+<script>
+const out = document.getElementById('out');
+const log = m => { out.textContent = JSON.stringify(m, null, 2); };
+window.__ocr = (async () => {
+  const t0 = performance.now();
+  const worker = await Tesseract.createWorker('spa', 1, {
+    workerPath: '/vendor/tesseract/worker.min.js',
+    corePath: '/vendor/tesseract-core',
+    langPath: '/vendor/tessdata',
+    logger: m => { if (m.status !== 'recognizing text') console.log('LOG', m.status, m.progress); }
+  });
+  const r = await worker.recognize('/samples/carta-escaneada.png');
+  await worker.terminate();
+  const res = { ms: Math.round(performance.now() - t0), chars: r.data.text.length, text: r.data.text.trim().slice(0, 800), words: r.data.words && r.data.words.length, lines: r.data.lines && r.data.lines.length };
+  window.__ocrResult = res;
+  log(res);
+  return res;
+})().catch(e => { window.__ocrError = String(e && e.stack || e); log({error: window.__ocrError}); throw e; });
+</script>
+</body></html>
